@@ -136,3 +136,15 @@ class SQLAlchemyForm(Form):
                                             multiple=multiple)
 
         return widget
+
+    def populate_widgets(self, session):
+
+        for node in self.schema:
+            try:
+                node.widget.populate(session)
+
+            except AttributeError:
+                continue
+
+    def dictify(self, obj):
+        return self.schema.dictify(obj)
