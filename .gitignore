@@ -1,0 +1,4 @@
+.coverage
+DeformAlchemy.egg-info/
+*.pyc
+.DS_Store
