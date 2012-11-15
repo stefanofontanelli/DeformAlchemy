@@ -1,1 +1,1 @@
-DeformAlchemy README
+DeformAlchemy helps you to auto-generate Deform forms that are based on SQLAlchemy mapped classes. 
