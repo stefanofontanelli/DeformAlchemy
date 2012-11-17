@@ -38,19 +38,19 @@ class SQLAlchemyForm(Form):
                                       includes=includes,
                                       excludes=excludes,
                                       overrides=overrides)
-        inspector = inspect(class_)
-        for prop in inspector.attrs:
+        self.inspector = inspect(class_)
+        for prop in self.inspector.attrs:
 
             name = prop.key
             if name not in schema or not schema[name].widget is None:
                 continue
 
             try:
-                getattr(inspector.column_attrs, name)
+                getattr(self.inspector.column_attrs, name)
                 factory = 'get_widget_from_column'
 
             except AttributeError:
-                getattr(inspector.relationships, name)
+                getattr(self.inspector.relationships, name)
                 factory = 'get_widget_from_relationship'
 
             schema[name].widget = getattr(self, factory)(prop)
