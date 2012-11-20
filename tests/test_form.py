@@ -57,10 +57,3 @@ class TestsSQLAlchemyForm(unittest.TestCase):
         form = SQLAlchemyForm(Address,
                               bootstrap_form_style='form-vertical')
         form.populate_widgets(session)
-
-    def test_form_dictify(self):
-        account = Account(email='mailbox@domain.tld')
-        form = SQLAlchemyForm(Account,
-                              bootstrap_form_style='form-vertical')
-        form.dictify(account)
-

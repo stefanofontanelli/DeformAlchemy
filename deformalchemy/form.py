@@ -145,6 +145,3 @@ class SQLAlchemyForm(Form):
 
             except AttributeError:
                 continue
-
-    def dictify(self, obj):
-        return self.schema.dictify(obj)
