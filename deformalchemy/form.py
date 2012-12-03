@@ -118,7 +118,12 @@ class SQLAlchemyForm(Form):
             msg = 'Multiple primary keys are not supported'
             raise NotImplementedError(msg)
 
-        key = primary_keys[0].key
+        for prop in inspector.column_attrs:
+            for col in prop.columns:
+                if col.primary_key:
+                    key = prop.key
+                    break
+
         if self.bootstrap and multiple:
             widget = SQLAlchemyChosenMultipleWidget(class_,
                                                     label=key,
@@ -143,5 +148,5 @@ class SQLAlchemyForm(Form):
             try:
                 node.widget.populate(session)
 
-            except AttributeError:
+            except AttributeError as e:
                 continue
