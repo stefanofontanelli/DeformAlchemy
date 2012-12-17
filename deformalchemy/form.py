@@ -14,7 +14,8 @@ from deform.widget import (CheckboxWidget,
                            DateTimeInputWidget,
                            RadioChoiceWidget,
                            TextAreaWidget,
-                           TextInputWidget)
+                           TextInputWidget,
+                           HiddenWidget)
 from deform_bootstrap.widget import DateTimeInputWidget as DateTimeWidget
 from inspect import isfunction
 from sqlalchemy import (Boolean,
@@ -94,6 +95,9 @@ class SQLAlchemyForm(Form):
 
         elif isinstance(column_type, Text):
             widget = TextAreaWidget()
+
+        elif isinstance(column_type, Integer) and column.primary_key and column.autoincrement:
+            widget = HiddenWidget()
 
         else:
             widget = TextInputWidget()
